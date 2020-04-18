@@ -1,14 +1,15 @@
 <template>
   <div class="budget-list-wrapp">
-    <template v-if>
-      <el-card :header="header" class="card">
+    <el-card :header="header" class="card">
+      <template v-if="isEmpty">
         <div class="list-item" v-for="(item, prop) in list" :key="prop">
           <span class="budget-comment">{{ item.comment }}</span>
           <span class="budget-value">{{ item.value }}</span>
-          <el-button type="danger" size="mini">Delete</el-button>
+          <el-button type="danger" size="mini" @click="deleteItem(item.id)">Удалить</el-button>
         </div>
-      </el-card>
-    </template>
+      </template>
+      <el-alert :closable="false" v-else type="info" :title="emptyTitle" />
+    </el-card>
   </div>
 </template>
 
@@ -22,11 +23,18 @@ export default {
     }
   },
   data: () => ({
-    header: 'Budget List'
+    header: 'Список доходов и расходов',
+    emptyTitle: 'Empty list'
   }),
   computed: {
     isEmpty() {
-      return Object.keys()
+      return Object.keys(this.list).length
+    }
+  },
+  methods: {
+    deleteItem(id) {
+      console.log(id)
+      this.$emit('deleteItem', id)
     }
   }
 }
