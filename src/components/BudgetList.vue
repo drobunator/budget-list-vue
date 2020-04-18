@@ -1,12 +1,14 @@
 <template>
   <div class="budget-list-wrapp">
-    <el-card :header="header" class="card">
-      <div class="list-item" v-for="(item, prop) in list" :key="prop">
-        <span class="budget-comment">{{ item.comment }}</span>
-        <span class="budget-value">{{ item.value }}</span>
-        <el-button type="danger" size="mini">Delete</el-button>
-      </div>
-    </el-card>
+    <template v-if>
+      <el-card :header="header" class="card">
+        <div class="list-item" v-for="(item, prop) in list" :key="prop">
+          <span class="budget-comment">{{ item.comment }}</span>
+          <span class="budget-value">{{ item.value }}</span>
+          <el-button type="danger" size="mini">Delete</el-button>
+        </div>
+      </el-card>
+    </template>
   </div>
 </template>
 
@@ -21,7 +23,12 @@ export default {
   },
   data: () => ({
     header: 'Budget List'
-  })
+  }),
+  computed: {
+    isEmpty() {
+      return Object.keys()
+    }
+  }
 }
 </script>
 
