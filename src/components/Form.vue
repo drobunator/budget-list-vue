@@ -58,7 +58,9 @@ export default {
   }),
   methods: {
     onSubmit() {
-      this.$refs.addItemForm.validate(valid => {})
+      this.$refs.addItemForm.validate(valid => {
+        valid
+      })
     }
   }
 }
