@@ -58,8 +58,18 @@ export default {
   }),
   methods: {
     onSubmit() {
+      if (this.formData.type === 'OUTCOME') {
+        this.formData.value = -Number(this.formData.value)
+      }
+
       this.$refs.addItemForm.validate(valid => {
-        valid
+        if (valid) {
+          this.$emit('submitForm', {
+            ...this.formData,
+            id: Math.random() + Math.random() * 10
+          })
+          this.$refs.addItemForm.resetFields()
+        }
       })
     }
   }
@@ -69,7 +79,7 @@ export default {
 <style scoped>
 .form-card {
   max-width: 768px;
-  margin: 0 auto 80px;
+  margin: 0 auto 30px;
   text-align: left;
 }
 .type-select {

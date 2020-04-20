@@ -2,7 +2,6 @@
   <div class="total-value">Баланс средств: {{ total }}</div>
 </template>
 
-
 <script>
 export default {
   name: 'TotalBalance',

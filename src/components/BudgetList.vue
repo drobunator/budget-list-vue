@@ -2,11 +2,12 @@
   <div class="budget-list-wrapp">
     <el-card :header="header" class="card">
       <template v-if="isEmpty">
-        <div class="list-item" v-for="(item, prop) in list" :key="prop">
-          <span class="budget-comment">{{ item.comment }}</span>
-          <span class="budget-value">{{ item.value }}</span>
-          <el-button type="danger" size="mini" @click="deleteItem(item.id)">Удалить</el-button>
-        </div>
+        <BudgetListItem
+          @deleteItem="deleteItem"
+          v-for="(item, prop) in list"
+          :key="prop"
+          v-bind:item="item"
+        />
       </template>
       <el-alert :closable="false" v-else type="info" :title="emptyTitle" />
     </el-card>
@@ -14,7 +15,12 @@
 </template>
 
 <script>
+import BudgetListItem from './BudgetListItem'
+
 export default {
+  components: {
+    BudgetListItem
+  },
   name: 'BudgetList',
   props: {
     list: {
@@ -24,7 +30,7 @@ export default {
   },
   data: () => ({
     header: 'Список доходов и расходов',
-    emptyTitle: 'Empty list'
+    emptyTitle: 'Список пуст'
   }),
   computed: {
     isEmpty() {
@@ -33,7 +39,6 @@ export default {
   },
   methods: {
     deleteItem(id) {
-      console.log(id)
       this.$emit('deleteItem', id)
     }
   }
@@ -45,15 +50,5 @@ export default {
 .card {
   max-width: 768px;
   margin: 0 auto;
-}
-.list-item {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-}
-.budget-value {
-  font-weight: bold;
-  margin-left: auto;
-  margin-right: 20px;
 }
 </style>
