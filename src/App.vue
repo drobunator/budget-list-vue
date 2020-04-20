@@ -46,6 +46,12 @@ export default {
         value: -50,
         comment: 'Какой-то расхоход',
         id: 5
+      },
+      6: {
+        type: 'INCOME',
+        value: 150,
+        comment: 'Какой-то расхоход',
+        id: 6
       }
     },
     sortValue: ''

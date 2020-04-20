@@ -1,5 +1,8 @@
 <template>
   <div class="list-item">
+    <span class="budget-icon">
+      <i :class="setIconClass"></i>
+    </span>
     <span class="budget-comment">{{ item.comment }}</span>
     <span class="budget-value">{{ item.value }}</span>
     <el-button type="danger" size="mini" @click="deleteItem(item.id)">Удалить</el-button>
@@ -22,6 +25,11 @@ export default {
         this.$emit('deleteItem', id)
       }
     }
+  },
+  computed: {
+    setIconClass() {
+      return this.item.type === 'INCOME' ? 'el-icon-top' : 'el-icon-bottom'
+    }
   }
 }
 </script>
@@ -37,5 +45,8 @@ export default {
   font-weight: bold;
   margin-left: auto;
   margin-right: 20px;
+}
+.budget-icon {
+  margin-right: 15px;
 }
 </style>
